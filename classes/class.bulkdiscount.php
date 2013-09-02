@@ -7,10 +7,15 @@
 					 3 => array('minimum_number' => 25, 'discount_percentage' => 40)
 				);
 		
+		static $porduct_variation = "participant-instructions-and-rating-form";
+		
 		const discount_msg_key = "_bulkdiscount_text_info";
 		
 		static function init(){
 			add_action('admin_menu', array(get_class(), 'admin_menu'), 100);
+			
+			//discounting
+			add_filter('gather_discount_coeffs', array(get_class(), 'apply_discount_changing_coeffs'), 10, 2);
 		}
 		
 		static function admin_menu(){
@@ -52,7 +57,15 @@
 		static function get_post_id_from_sku($sku = null){
 			global $wpdb;
 			return $wpdb->get_var("select post_id from $wpdb->postmeta where meta_key = '_sku' and meta_value = '$sku'");
-		} 
+		}
+
+		
+		static function apply_discount_changing_coeffs($coeff, $product){
+			if($product->product_custom_fields['attribute_product-type'][0] == self::$porduct_variation){
+				return $coeff;
+			}
+			return 1;
+		}
 		
 	}
 ?>
