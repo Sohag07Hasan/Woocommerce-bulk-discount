@@ -240,7 +240,7 @@ if (!class_exists('Woo_Bulk_Discount_Plugin_t4m')) {
          */
         public function action_product_write_panel_tabs()
         {
-            echo '<li class="bulkdiscount_tab bulkdiscount_options"><a href="#bulkdiscount_product_data">' . __('Bulk Discount', 'wc_bulk_discount') . '</a></li>';
+            echo '<li class="bulkdiscount_tab bulkdiscount_options"><a href="#bulkdiscount_product_data"><span>' . __('Bulk Discount', 'wc_bulk_discount') . '</span></a></li>';
         }
 
         /**
